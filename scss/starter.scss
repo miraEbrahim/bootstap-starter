@@ -29,10 +29,34 @@ $enable-gradients: true;
 $enable-shadows: true;
 
 // Customize some defaults
-$body-color: #333;
+$body-color: #1a1d20;
 $body-bg: #fff;
 $border-radius: .4rem;
-$success: #7952b3;
+$light:#f8fbff;
+
+$dark:rgb(64,60,69);
+
+$blue: #0070FF;
+$green : #009355;
+$pink : #FF0467;
+$orange : #FA830F;
+$purple : #9A0DA0;
+
+$font-family-base: 'Poppins', sans-serif;
+ 
+
+//   font-family: 'Smooch Sans', sans-serif;
+
+
+// @green : #009355;
+// @pink : #FF0467;
+// @orange : #FA830F;
+// @purple : #9A0DA0;
+// @blue : #0070FF;
+
+
+  // color: #1a1d20 !important;
+
 
 @import "bootstrap/scss/functions"; // Required
 @import "bootstrap/scss/variables"; // Required
@@ -73,6 +97,26 @@ $success: #7952b3;
 @import "bootstrap/scss/utilities";
 // @import "bootstrap/scss/print";
 
+$all-colors: map-merge-multiple($blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+
+@import "bootstrap/scss/utilities/api";
 
 //
 // Custom styles
@@ -81,10 +125,56 @@ $success: #7952b3;
 @import "icon-list";
 
 body {
-  padding: 3rem 1.5rem;
+  padding: 3rem 1rem;
 }
 
 // Style Bootstrap icons
 .bi {
   fill: currentColor;
 }
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Smooch Sans', sans-serif;
+  letter-spacing: 0.5px;
+ }
+
+ 
+@media (max-width: 991.98px) {
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #fff;
+    transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+  }
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, .75);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
